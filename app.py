@@ -17,9 +17,9 @@ api = Api(app)
 
 jwt = JWT(app, authenticate, identity)  # /auth endpoint
 
-@app.before_first_request
-def create_tables():
-    db.create_all()      #create table which it sees, unless they exists.
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()      #create table which it sees, unless they exists.
 
 api.add_resource(Itemlist, '/items')
 api.add_resource(Item, '/item/<string:name>')
@@ -30,5 +30,6 @@ api.add_resource(UserRegister,'/register')
 
 if __name__ == "__main__":
     from db import db
+    db.create_all()
     db.init_app(app)
     app.run(port=5000, debug=True)
